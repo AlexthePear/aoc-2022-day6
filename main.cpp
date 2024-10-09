@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <unordered_set>
 #include <algorithm> // find
 #include <vector>
@@ -75,6 +76,28 @@ int faster_array(const std::string &input) {
   return -1;
 }
 
+// Helper to count the number of set bits (equivalent to Rust's count_ones)
+inline uint32_t count_ones(uint32_t n) {
+    return __builtin_popcount(n); // GCC/Clang built-in function to count set bits
+}
+
+int benny(const std::string &input) {
+  uint32_t mask = 0;
+  for (size_t i = 0; i < 13; ++i) {
+    mask ^= 1 << (input[i] % 32);
+  }
+  for (size_t i = 0; i <= input.size() - 14; ++i) {
+    uint8_t first = input[i];
+    uint8_t last = input[i + 13];
+    mask ^= 1 << (last % 32);
+    if (count_ones(mask) == 14) {
+      return i + 14;
+    }
+    mask ^= 1 << (first % 32);
+  }
+  return -1;
+}
+
 int main() {
   std::ifstream inputfile("input.txt");
   if (!inputfile.is_open()) {
@@ -89,6 +112,7 @@ int main() {
   std::cout << hash_set_faster(line) << "\n";
   std::cout << faster_vector(line) << "\n";
   std::cout << faster_array(line) << "\n";
+  std::cout << benny(line) << "\n";
 
   return 0;
 }
