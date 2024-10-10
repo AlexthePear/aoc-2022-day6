@@ -7,7 +7,7 @@
 #include <vector>
 
 using std::chrono::duration_cast;
-using std::chrono::milliseconds;
+using std::chrono::microseconds;
 using Clock = std::chrono::high_resolution_clock;
 
 // Take 14 characters and insert them into a hash set, then get the size of it
@@ -114,38 +114,38 @@ int main() {
   std::getline(inputfile, line);
 
   auto start = Clock::now();
-  std::cout << "hash_set_simple ans: " << hash_set_simple(line) << "\n";
+  std::cout << "hash_set_simple ans:  " << hash_set_simple(line) << "\n";
   auto end = Clock::now();
-  std::cout << "hash_set_simple took "
-            << duration_cast<milliseconds>(end - start).count() << " ms\n";
+  std::cout << "hash_set_simple took: "
+            << duration_cast<microseconds>(end - start).count() << " µs\n";
   std::cout << std::endl;
 
   start = Clock::now();
-  std::cout << "hash_set_faster ans: " << hash_set_faster(line) << "\n";
+  std::cout << "hash_set_faster ans:  " << hash_set_faster(line) << "\n";
   end = Clock::now();
-  std::cout << "hash_set_faster took "
-            << duration_cast<milliseconds>(end - start).count() << " ms\n";
+  std::cout << "hash_set_faster took: "
+            << duration_cast<microseconds>(end - start).count() << " µs\n";
   std::cout << std::endl;
 
   start = Clock::now();
-  std::cout << "faster_vector ans: " << faster_vector(line) << "\n";
+  std::cout << "faster_vector ans:    " << faster_vector(line) << "\n";
   end = Clock::now();
-  std::cout << "faster_vector took "
-            << duration_cast<milliseconds>(end - start).count() << " ms\n";
+  std::cout << "faster_vector took:   "
+            << duration_cast<microseconds>(end - start).count() << " µs\n";
   std::cout << std::endl;
 
   start = Clock::now();
-  std::cout << "faster_array ans: " << faster_array(line) << "\n";
+  std::cout << "faster_array ans:     " << faster_array(line) << "\n";
   end = Clock::now();
-  std::cout << "faster_array took "
-            << duration_cast<milliseconds>(end - start).count() << " ms\n";
+  std::cout << "faster_array took:    "
+            << duration_cast<microseconds>(end - start).count() << " µs\n";
   std::cout << std::endl;
 
   start = Clock::now();
-  std::cout << "benny ans: " << benny(line) << "\n";
+  std::cout << "benny ans:            " << benny(line) << "\n";
   end = Clock::now();
-  std::cout << "benny took " << duration_cast<milliseconds>(end - start).count()
-            << "ms\n";
+  std::cout << "benny took:           "
+            << duration_cast<microseconds>(end - start).count() << " µs\n";
   std::cout << std::endl;
 
   return 0;
